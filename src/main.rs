@@ -1,8 +1,15 @@
 use reqwest::blocking::get;
 use scraper::{Html, Selector};
+use std::io::{self, Write};
 
 fn main() {
-    let url = "https://example.com";
+    print!("Enter a URL (with http:// or https://): ");
+    io::stdout().flush().unwrap();
+
+    let mut url = String::new();
+    io::stdin().read_line(&mut url).unwrap();
+    let url = url.trim();
+
     println!("Fetching: {}", url);
 
     match fetch_page(url) {
